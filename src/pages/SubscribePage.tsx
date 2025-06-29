@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, CheckCircle, BookOpen, Bell, Users, Zap, Sparkles } from 'lucide-react';
+import { Mail, CheckCircle, BookOpen, Bell, Users, Zap } from 'lucide-react';
 
 const SubscribePage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +29,7 @@ const SubscribePage: React.FC = () => {
               Welcome aboard! 🎉
             </h1>
             <p className="text-accent-600 dark:text-accent-300 font-inter leading-relaxed">
-              You've successfully subscribed to Tech Log. Get ready for amazing content!
+              You've successfully subscribed to TechGlobe. Get ready for amazing content!
             </p>
           </div>
           
@@ -164,7 +164,7 @@ const SubscribePage: React.FC = () => {
                     <span>Subscribing...</span>
                   </div>
                 ) : (
-                  'Subscribe to Tech Log'
+                  'Subscribe to TechGlobe'
                 )}
               </button>
             </form>
@@ -209,12 +209,12 @@ const SubscribePage: React.FC = () => {
               {
                 name: "Sarah Johnson",
                 role: "Senior Frontend Developer",
-                content: "Tech Log's newsletter is the first thing I read every Monday. The content is always relevant, well-curated, and incredibly valuable."
+                content: "TechGlobe's newsletter is the first thing I read every Monday. The content is always relevant, well-curated, and incredibly valuable."
               },
               {
                 name: "Mike Chen",
                 role: "Full Stack Engineer",
-                content: "I've learned so much from Tech Log's exclusive articles. The tutorials are practical, detailed, and easy to follow. Worth every subscription!"
+                content: "I've learned so much from TechGlobe's exclusive articles. The tutorials are practical, detailed, and easy to follow. Worth every subscription!"
               },
               {
                 name: "Emma Davis",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, User, ArrowRight } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
@@ -6,6 +6,16 @@ import { blogPosts } from '../data/blogPosts';
 const HomePage: React.FC = () => {
   const featuredPost = blogPosts[0];
   const recentPosts = blogPosts.slice(1);
+
+  useEffect(() => {
+    // Add class to hide scrollbar on homepage
+    document.documentElement.classList.add('homepage-no-scrollbar');
+    
+    // Cleanup when component unmounts
+    return () => {
+      document.documentElement.classList.remove('homepage-no-scrollbar');
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-accent-50 via-white to-primary-50 dark:from-accent-900 dark:via-accent-800 dark:to-accent-900">
@@ -51,7 +61,7 @@ const HomePage: React.FC = () => {
               <span className="font-playfair">Welcome to</span>
               <br />
               <span className="font-merriweather bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-300 dark:from-primary-400 dark:via-secondary-400 dark:to-luxury-400 bg-clip-text text-transparent">
-                Tech Log
+                TechGlobe
               </span>
             </h1>
             

@@ -38,7 +38,7 @@ const Header: React.FC = () => {
               <div className="absolute inset-0 bg-primary-600 dark:bg-primary-400 opacity-20 blur-lg group-hover:opacity-30 transition-opacity duration-300" />
             </div>
             <span className="text-xl font-bold font-playfair text-accent-900 dark:text-white bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-              Tech Log
+              TechGlobe
             </span>
           </Link>
 

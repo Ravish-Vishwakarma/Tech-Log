@@ -1,3 +1,106 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom scrollbar for Table of Contents */
+.toc-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.toc-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 2px;
+}
+
+.toc-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+.dark .toc-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.7);
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.8);
+}
+
+.dark .toc-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 0.9);
+}
+
+/* Hide scrollbar on homepage */
+.homepage-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.homepage-no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom scrollbar for the entire page (except homepage) */
+:not(.homepage-no-scrollbar)::-webkit-scrollbar {
+  width: 8px;
+}
+
+:not(.homepage-no-scrollbar)::-webkit-scrollbar-track {
+  background: rgba(51, 65, 85, 0.9);
+  border-radius: 4px;
+}
+
+:not(.homepage-no-scrollbar)::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 225, 0.8);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+:not(.homepage-no-scrollbar)::-webkit-scrollbar-thumb:hover {
+  background: rgba(226, 232, 240, 1);
+  transform: scaleX(1.2);
+}
+
+:not(.homepage-no-scrollbar)::-webkit-scrollbar-thumb:active {
+  background: rgba(241, 245, 249, 1);
+}
+
+/* Dark mode scrollbar */
+.dark :not(.homepage-no-scrollbar)::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.dark :not(.homepage-no-scrollbar)::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.8);
+}
+
+.dark :not(.homepage-no-scrollbar)::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 1);
+  transform: scaleX(1.2);
+}
+
+.dark :not(.homepage-no-scrollbar)::-webkit-scrollbar-thumb:active {
+  background: rgba(203, 213, 225, 1);
+}
+
+/* Firefox scrollbar (except homepage) */
+html:not(.homepage-no-scrollbar) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(203, 213, 225, 0.8) rgba(51, 65, 85, 0.9);
+}
+
+.dark html:not(.homepage-no-scrollbar) {
+  scrollbar-color: rgba(100, 116, 139, 0.8) rgba(15, 23, 42, 0.9);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
