@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface AdSenseAdProps {
     adSlot: string;
@@ -15,11 +15,14 @@ const AdSenseAd: React.FC<AdSenseAdProps> = ({
     style,
     className = ''
 }) => {
+    const adPushed = useRef(false);
+
     useEffect(() => {
         try {
-            // Check if adsbygoogle is available
-            if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
+            // Check if adsbygoogle is available and if we haven't already pushed this ad
+            if (typeof window !== 'undefined' && (window as any).adsbygoogle && !adPushed.current) {
                 ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+                adPushed.current = true;
             }
         } catch (error) {
             console.error('AdSense error:', error);
