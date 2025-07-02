@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Clock, User, Calendar, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -7,12 +7,7 @@ import MarkdownRenderer from '../components/MarkdownRenderer';
 import TableOfContents from '../components/TableOfContents';
 import CommentSection from '../components/CommentSection';
 import RelatedPosts from '../components/RelatedPosts';
-
-declare global {
-  interface Window {
-    adsbygoogle: unknown[];
-  }
-}
+import AdSenseAd from '../components/AdSenseAd';
 
 const BlogPostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,16 +18,6 @@ const BlogPostPage: React.FC = () => {
   }
 
   const relatedPosts = getRelatedPosts(post.id, post.tags);
-  const adRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (window.adsbygoogle && adRef.current) {
-      try {
-        // @ts-ignore
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {}
-    }
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-accent-50 via-white to-primary-50 dark:from-accent-900 dark:via-accent-800 dark:to-accent-900">
@@ -42,19 +27,19 @@ const BlogPostPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-secondary-600 to-luxury-600 dark:hidden" />
         {/* Dark mode background */}
         <div className="absolute inset-0 bg-gradient-to-br from-accent-800 via-accent-700 to-accent-900 hidden dark:block" />
-        
+
         {/* Light mode overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent dark:hidden" />
         {/* Dark mode overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent hidden dark:block" />
-        
+
         {/* Subtle animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Light mode elements - gentle floating effect */}
           <div className="absolute top-20 right-20 w-32 h-32 bg-white/5 rounded-full blur-2xl animate-pulse-slow dark:hidden" />
           <div className="absolute bottom-32 left-32 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl animate-pulse-slow dark:hidden" />
           <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-orange-400/8 rounded-full blur-xl animate-pulse-slow dark:hidden" />
-          
+
           {/* Dark mode elements - subtle glow effect */}
           <div className="absolute top-20 right-20 w-32 h-32 bg-primary-400/10 rounded-full blur-2xl animate-pulse-slow hidden dark:block" />
           <div className="absolute bottom-32 left-32 w-48 h-48 bg-secondary-400/15 rounded-full blur-3xl animate-pulse-slow hidden dark:block" />
@@ -80,7 +65,7 @@ const BlogPostPage: React.FC = () => {
               >
                 <ArrowLeft className="h-6 w-6 group-hover:-translate-x-1 transition-transform duration-300" />
               </Link>
-              
+
               <div className="flex flex-wrap gap-3">
                 {post.tags.map((tag) => (
                   <span
@@ -92,11 +77,11 @@ const BlogPostPage: React.FC = () => {
                 ))}
               </div>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight font-playfair">
               {post.title}
             </h1>
-            
+
             <div className="flex items-center space-x-8 text-white/90 dark:text-white/80">
               <div className="flex items-center space-x-3">
                 <User className="h-6 w-6" />
@@ -121,26 +106,24 @@ const BlogPostPage: React.FC = () => {
           {/* Left Sidebar - Ad Space */}
           <aside className="w-64 flex-shrink-0 hidden xl:block">
             <div className="sticky top-32 space-y-8">
-              {/* Premium Ad */}
-              <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-accent-800 dark:to-accent-700 rounded-2xl p-6 text-center border-2 border-dashed border-primary-300 dark:border-accent-600 shadow-luxury">
-                <p className="text-accent-600 dark:text-accent-400 text-sm font-medium font-inter mb-4">Premium Advertisement</p>
-                <ins
-                  className="adsbygoogle"
-                  style={{ display: 'block' }}
-                  data-ad-client="ca-pub-3077203436679622"
-                  data-ad-slot="5140955462"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"
-                  ref={adRef as any}
+              {/* Google AdSense - Premium Ad */}
+              <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-accent-800 dark:to-accent-700 rounded-2xl p-4 border border-primary-200 dark:border-accent-600 shadow-luxury">
+                <p className="text-accent-600 dark:text-accent-400 text-xs font-medium font-inter mb-3 text-center">Advertisement</p>
+                <AdSenseAd
+                  adSlot="5140955462"
+                  style={{ minHeight: '250px' }}
+                  className="rounded-xl overflow-hidden"
                 />
               </div>
-              
-              {/* Sponsored Content */}
-              <div className="bg-gradient-to-br from-luxury-50 to-primary-50 dark:from-accent-800 dark:to-accent-700 rounded-2xl p-6 text-center border-2 border-dashed border-luxury-300 dark:border-accent-600 shadow-luxury">
-                <p className="text-accent-600 dark:text-accent-400 text-sm font-medium font-inter mb-4">Sponsored Content</p>
-                <div className="bg-gradient-to-br from-luxury-100 to-primary-100 dark:from-accent-700 dark:to-accent-600 rounded-xl h-32 flex items-center justify-center shadow-lg">
-                  <span className="text-accent-500 dark:text-accent-400 text-xs font-inter">Sponsor Ad</span>
-                </div>
+
+              {/* Additional Ad Space */}
+              <div className="bg-gradient-to-br from-luxury-50 to-primary-50 dark:from-accent-800 dark:to-accent-700 rounded-2xl p-4 border border-luxury-200 dark:border-accent-600 shadow-luxury">
+                <p className="text-accent-600 dark:text-accent-400 text-xs font-medium font-inter mb-3 text-center">Sponsored</p>
+                <AdSenseAd
+                  adSlot="5140955462"
+                  style={{ minHeight: '200px' }}
+                  className="rounded-xl overflow-hidden"
+                />
               </div>
             </div>
           </aside>
@@ -149,8 +132,18 @@ const BlogPostPage: React.FC = () => {
           <main className="flex-1 min-w-0">
             <article className="bg-white dark:bg-accent-800 rounded-3xl shadow-luxury p-10 mb-12 border border-accent-200 dark:border-accent-700">
               <MarkdownRenderer content={post.content} />
+
+              {/* In-content Ad */}
+              <div className="my-12 bg-gradient-to-br from-accent-50 to-primary-50 dark:from-accent-800 dark:to-accent-700 rounded-2xl p-6 border border-accent-200 dark:border-accent-600 shadow-lg">
+                <p className="text-accent-600 dark:text-accent-400 text-sm font-medium font-inter mb-4 text-center">Advertisement</p>
+                <AdSenseAd
+                  adSlot="5140955462"
+                  style={{ minHeight: '120px' }}
+                  className="rounded-xl overflow-hidden"
+                />
+              </div>
             </article>
-            
+
             <CommentSection postId={post.id} />
             <RelatedPosts posts={relatedPosts} />
           </main>

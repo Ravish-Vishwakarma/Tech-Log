@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, User, ArrowRight } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
+import AdSenseAd from '../components/AdSenseAd';
 
 const HomePage: React.FC = () => {
   const featuredPost = blogPosts[0];
@@ -10,7 +11,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     // Add class to hide scrollbar on homepage
     document.documentElement.classList.add('homepage-no-scrollbar');
-    
+
     // Cleanup when component unmounts
     return () => {
       document.documentElement.classList.remove('homepage-no-scrollbar');
@@ -25,12 +26,12 @@ const HomePage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-secondary-600 to-luxury-600 dark:hidden" />
         {/* Dark mode background */}
         <div className="absolute inset-0 bg-gradient-to-br from-accent-800 via-accent-700 to-accent-900 hidden dark:block" />
-        
+
         {/* Light mode overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent dark:hidden" />
         {/* Dark mode overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent hidden dark:block" />
-        
+
         {/* Subtle animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Light mode elements - gentle floating effect */}
@@ -38,7 +39,7 @@ const HomePage: React.FC = () => {
           <div className="absolute bottom-32 left-32 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl animate-pulse-slow dark:hidden" />
           <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-orange-400/8 rounded-full blur-xl animate-pulse-slow dark:hidden" />
           <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-secondary-400/8 rounded-full blur-2xl animate-pulse-slow dark:hidden" />
-          
+
           {/* Dark mode elements - subtle glow effect */}
           <div className="absolute top-20 right-20 w-32 h-32 bg-primary-400/10 rounded-full blur-2xl animate-pulse-slow hidden dark:block" />
           <div className="absolute bottom-32 left-32 w-48 h-48 bg-secondary-400/15 rounded-full blur-3xl animate-pulse-slow hidden dark:block" />
@@ -64,12 +65,12 @@ const HomePage: React.FC = () => {
                 TechGlobe
               </span>
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-white/90 dark:text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed font-inter font-light">
-              Discover the latest in web development, programming tutorials, and tech insights. 
+              Discover the latest in web development, programming tutorials, and tech insights.
               Join thousands of developers learning and growing together in our community.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Link
                 to="/subscribe"
@@ -78,7 +79,7 @@ const HomePage: React.FC = () => {
                 <span>Subscribe for Updates</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
-              
+
               <Link
                 to={`/blog/${featuredPost.id}`}
                 className="group inline-flex items-center space-x-3 bg-white/10 dark:bg-white/5 backdrop-blur-sm text-white font-semibold px-8 py-4 rounded-2xl hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 border border-white/20 dark:border-white/10 font-inter"
@@ -100,7 +101,7 @@ const HomePage: React.FC = () => {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto rounded-full" />
           </div>
-          
+
           <Link
             to={`/blog/${featuredPost.id}`}
             className="group block bg-white dark:bg-accent-800 rounded-3xl shadow-luxury hover:shadow-luxury-lg overflow-hidden transition-all duration-500 transform hover:-translate-y-3 border border-accent-200 dark:border-accent-700"
@@ -132,15 +133,15 @@ const HomePage: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                
+
                 <h3 className="text-3xl font-bold font-merriweather text-accent-900 dark:text-white mb-6 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors leading-tight">
                   {featuredPost.title}
                 </h3>
-                
+
                 <p className="text-accent-600 dark:text-accent-300 mb-8 leading-relaxed text-lg font-inter">
                   {featuredPost.excerpt}
                 </p>
-                
+
                 <div className="flex items-center justify-between text-sm text-accent-500 dark:text-accent-400">
                   <div className="flex items-center space-x-6">
                     <div className="flex items-center space-x-2">
@@ -159,6 +160,18 @@ const HomePage: React.FC = () => {
           </Link>
         </section>
 
+        {/* Ad Section between Featured and Recent Posts */}
+        <section className="mb-24">
+          <div className="bg-gradient-to-br from-accent-50 to-primary-50 dark:from-accent-800 dark:to-accent-700 rounded-3xl p-8 border border-accent-200 dark:border-accent-600 shadow-luxury">
+            <p className="text-accent-600 dark:text-accent-400 text-sm font-medium font-inter mb-6 text-center">Advertisement</p>
+            <AdSenseAd
+              adSlot="5140955462"
+              style={{ minHeight: '150px' }}
+              className="rounded-2xl overflow-hidden"
+            />
+          </div>
+        </section>
+
         {/* Recent Posts */}
         <section>
           <div className="text-center mb-12">
@@ -167,7 +180,7 @@ const HomePage: React.FC = () => {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-secondary-600 to-luxury-600 mx-auto rounded-full" />
           </div>
-          
+
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {recentPosts.map((post, index) => (
               <Link
@@ -184,7 +197,7 @@ const HomePage: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 </div>
-                
+
                 <div className="p-8">
                   <div className="flex flex-wrap gap-2 mb-4">
                     {post.tags.slice(0, 2).map((tag) => (
@@ -196,15 +209,15 @@ const HomePage: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  
+
                   <h3 className="text-xl font-semibold font-merriweather text-accent-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 leading-tight">
                     {post.title}
                   </h3>
-                  
+
                   <p className="text-accent-600 dark:text-accent-300 mb-6 text-sm line-clamp-3 font-inter leading-relaxed">
                     {post.excerpt}
                   </p>
-                  
+
                   <div className="flex items-center justify-between text-xs text-accent-500 dark:text-accent-400">
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-1">
