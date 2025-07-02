@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Clock, User, Calendar, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,12 @@ import MarkdownRenderer from '../components/MarkdownRenderer';
 import TableOfContents from '../components/TableOfContents';
 import CommentSection from '../components/CommentSection';
 import RelatedPosts from '../components/RelatedPosts';
+
+declare global {
+  interface Window {
+    adsbygoogle: unknown[];
+  }
+}
 
 const BlogPostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,6 +23,16 @@ const BlogPostPage: React.FC = () => {
   }
 
   const relatedPosts = getRelatedPosts(post.id, post.tags);
+  const adRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.adsbygoogle && adRef.current) {
+      try {
+        // @ts-ignore
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {}
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-accent-50 via-white to-primary-50 dark:from-accent-900 dark:via-accent-800 dark:to-accent-900">
@@ -105,12 +121,18 @@ const BlogPostPage: React.FC = () => {
           {/* Left Sidebar - Ad Space */}
           <aside className="w-64 flex-shrink-0 hidden xl:block">
             <div className="sticky top-32 space-y-8">
-              {/* Premium Ad Placeholder */}
+              {/* Premium Ad */}
               <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-accent-800 dark:to-accent-700 rounded-2xl p-6 text-center border-2 border-dashed border-primary-300 dark:border-accent-600 shadow-luxury">
                 <p className="text-accent-600 dark:text-accent-400 text-sm font-medium font-inter mb-4">Premium Advertisement</p>
-                <div className="bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-accent-700 dark:to-accent-600 rounded-xl h-48 flex items-center justify-center shadow-lg">
-                  <span className="text-accent-500 dark:text-accent-400 text-xs font-inter">Your Premium Ad Here</span>
-                </div>
+                <ins
+                  className="adsbygoogle"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-3077203436679622"
+                  data-ad-slot="5140955462"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                  ref={adRef as any}
+                />
               </div>
               
               {/* Sponsored Content */}
